@@ -1,0 +1,20 @@
+{
+  "table-add": "Добавить+",
+  "button-sendFlowers": "Отослать цветы",
+  "button-request": "Подать заявку",
+  "button-pending": "Обрабатывается",
+  "button-accepted": "Принято",
+  "quickView-auction-title": "Аукцион",
+  "quickView-auction-name": "Название",
+  "quickView-auction-date": "Дата",
+  "quickView-flower-title": "Цветок",
+  "quickView-flower-ownerId": "Id Владельца",
+  "quickView-flower-auctionId": "Id Аукциона",
+  "quickView-flower-name": "Название",
+  "quickView-flower-value": "Ценность",
+  "quickView-buyer-title": "Участник",
+  "quickView-buyer-login": "Логин",
+  "quickView-buyer-firstName": "Имя",
+  "quickView-buyer-lastName": "Фамилия",
+  "quickView-buyer-dob": "Дата Рождения"
+}

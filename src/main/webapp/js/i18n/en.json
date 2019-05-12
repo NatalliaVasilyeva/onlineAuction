@@ -1,0 +1,20 @@
+{
+  "table-add": "Add+",
+  "button-sendFlowers": "Send Flowers",
+  "button-request": "Request",
+  "button-pending": "Pending",
+  "button-accepted": "Accepted",
+  "quickView-auction-title": "Auction",
+  "quickView-auction-name": "Name",
+  "quickView-auction-date": "Date",
+  "quickView-flower-title": "Flower",
+  "quickView-flower-ownerId": "Owner Id",
+  "quickView-flower-auctionId": "Auction Id",
+  "quickView-flower-name": "Name",
+  "quickView-flower-value": "Value",
+  "quickView-buyer-title": "Buyer",
+  "quickView-buyer-login": "Login",
+  "quickView-buyer-firstName": "First Name",
+  "quickView-buyer-lastName": "Last Name",
+  "quickView-buyer-dob": "Date Of Birth"
+}
