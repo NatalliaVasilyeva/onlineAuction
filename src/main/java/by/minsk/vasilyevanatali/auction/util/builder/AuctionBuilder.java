@@ -12,6 +12,7 @@ public class AuctionBuilder {
     private LocalDateTime finishTime;
     private AuctionType auctionType;
     private String description;
+    private Integer ownerId;
 
     public AuctionBuilder() {
 
@@ -72,10 +73,21 @@ public class AuctionBuilder {
         return this;
     }
 
+    /**
+     * Sets oner id according to given parameter.
+     *
+     * @param ownerId of auction.
+     * @return current builder.
+     */
+
+    public AuctionBuilder byOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
+        return this;
+    }
 
     /**
      * Builds and returns {@link Auction} object in accordance with set earlier
-     * parameters (id, startTime, finishTime, auctionType, description).
+     * parameters (id, startTime, finishTime, auctionType, description, ownerId).
      *
      * @return object with information about new auction.
      */
@@ -86,6 +98,7 @@ public class AuctionBuilder {
         auction.setFinishTime(finishTime);
         auction.setAuctionType(auctionType);
         auction.setDescription(description);
+        auction.setOwner_id(ownerId);
         return auction;
     }
 
@@ -107,6 +120,10 @@ public class AuctionBuilder {
 
     String getDescription() {
         return description;
+    }
+
+    Integer getOwnerId() {
+        return ownerId;
     }
 
 

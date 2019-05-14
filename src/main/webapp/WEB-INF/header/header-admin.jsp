@@ -23,9 +23,7 @@
             </a>
             <div class="dropdown-menu">
                 <form method="POST" action="change-language" id="change_language_form">
-                    <%--                    <input type="hidden" name="command" value="change_language">--%>
-                    <%--                    <input type="hidden" name="nonce" value="${nonce}" />--%>
-                    <select class="btn w-100" name="language" required>
+                        <select class="btn w-100" name="language" required>
                         <option disabled selected value=""><fmt:message key="form.choose_language"/>:</option>
                         <option value="en_US">English</option>
                         <option value="ru_RU">Русский</option>
@@ -53,9 +51,11 @@
                 </a>
             </div>
         </li>
+    </ul>
+    <ul class="navbar-nav">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <c:out value="${sessionScope.login}"/>
+                <c:out value="${sessionScope.username}"/>
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="javascript:goToProfile()">
@@ -79,3 +79,11 @@
 <form id="manage-requests-form" action="manage-requests" method="get"></form>
 <form id="manage-users-form" action="manage-users" method="get"></form>
 <form id="request-auction-form" action="request" method="get"></form>
+
+<script type="text/javascript">
+    $(function () {
+        $('#change_language_form select[name=language]').change(function () {
+            this.form.submit();
+        });
+    });
+</script>

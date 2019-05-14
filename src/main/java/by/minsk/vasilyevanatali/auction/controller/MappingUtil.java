@@ -22,15 +22,15 @@ import java.util.Map;
         gets = {
                 "", "business-profile",
                 "manage-auctions", "manage-users", "manage-requests",
-                "profile", "settings", "welcome"
+                "profile", "settings", "welcome", "add-auction"
         },
-        posts = {"", "block-user", "unblock-user", "approve-lot", "unapprove-lot", "create-auction",
+        posts = {"", "block-user", "unblock-user", "approve-lot", "unapprove-lot", "add-auction",
                 "propose-lot", "business-profile",
                 "change-locale", "change-password", "edit-auction",
                 "edit-lot", "edit-profile", "make-bid",
                 "manage-auctions", "manage-requests", "manage-users",
                 "profile", "remove-auction", "delete-lot", "remove-user",
-                "sign-in", "sign-out", "sign-up", "add-funds", "withdraw-funds", "change-language"
+                "sign-in", "sign-out", "sign-up", "add-funds", "withdraw-funds", "change-language", "my-auction"
         })
 class MappingUtil {
 
@@ -48,6 +48,8 @@ class MappingUtil {
         mappingUriJsp.put("request", "WEB-INF/user/request.jsp");
         mappingUriJsp.put("settings", "WEB-INF/user/settings.jsp");
         mappingUriJsp.put("welcome", "WEB-INF/guest/welcome.jsp");
+        mappingUriJsp.put("add-auction", "WEB-INF/user/add-auction.jsp");
+        mappingUriJsp.put("user-auction", "WEB-INF/user/user-auction.jsp");
     }
 
     /**

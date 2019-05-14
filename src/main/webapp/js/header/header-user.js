@@ -2,8 +2,12 @@ function goToBusinessProfile() {
     $("#business-profile-form").submit()
 }
 
-function goToRunningAuction() {
-    $("#running-auction-form").submit()
+function goToMyAuctions() {
+    $("#my-auction-form").submit()
+}
+
+function goToAddAuction() {
+    $("#add-auction-form").submit()
 }
 
 function goToProfile() {

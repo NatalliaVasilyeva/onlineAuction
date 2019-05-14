@@ -25,8 +25,8 @@ import java.io.IOException;
                 "/edit-lot", "/edit-profile", "/make-bid",
                 "/add-funds", "/withdraw-funds",
                 "/profile", "/delete-lot",
-                "/sign-out"
-})
+                "/sign-out", "/add-auction", "/my-auction"
+        })
 public class UserAccessFilter implements Filter {
 
     private static Logger logger = LogManager.getLogger();

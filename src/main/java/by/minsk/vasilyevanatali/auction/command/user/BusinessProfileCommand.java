@@ -39,12 +39,12 @@ public class BusinessProfileCommand implements Command {
                         req.setAttribute("myLots", myLots.get());
                         req.setAttribute("myBidLots", myBidLots.get());
                         LOGGER.debug("There are some info in DB about lots");
-                        page = "business-profile";
+                 //       page = "business-profile";
                     } else {
                         LOGGER.debug("There are no lots of this user's lots or bids in DB");
                         req.setAttribute("errorMessage", "There are no lots of this user's lots or bids in DB");
 //                        page = "welcome";
-                        page="business-profile";
+                 //       page="business-profile";
 
                     }
                 } catch (ServiceException e) {
@@ -54,12 +54,13 @@ public class BusinessProfileCommand implements Command {
             } else {
                 req.setAttribute("errorMessage", "User is blocked");
              //   page = "welcome";
-                page="business-profile";
+              //  page="business-profile";
             }
+            page="business-profile";
         } else {
             req.setAttribute("errorMessage", "User is null");
            // page = "welcome";
-            page="business-profile";
+       //     page="business-profile";
         }
         return page;
     }

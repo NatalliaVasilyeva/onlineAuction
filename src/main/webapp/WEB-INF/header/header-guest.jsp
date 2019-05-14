@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -16,13 +16,10 @@
                     <a class="nav-brand" href="/"></a>
                 </c:when>
                 <c:otherwise>
-                    <%--                    ${english_auction}--%>
                     <fmt:message key="header.english_auction"/> <span class="fa fa-leaf"></span>
                 </c:otherwise>
             </c:choose>
-            <%--            <a class="nav-brand" href="/">--%>
-            <%--                <fmt:message key="header.english_auction"/> <span class="fa fa-leaf"></span>--%>
-            <%--            </a>--%>
+
         </div>
     </div>
 
@@ -33,7 +30,7 @@
             </a>
             <div class="dropdown-menu">
                 <form method="POST" action="change-language" id="change_language_form">
-                 <select class="btn w-100" name="language" required>
+                    <select class="btn w-100" name="language" required>
                         <option disabled selected value=""><fmt:message key="form.choose_language"/>:</option>
                         <option value="en_US">English</option>
                         <option value="ru_RU">Русский</option>

@@ -9,32 +9,36 @@ public class Auction extends Bean {
     private LocalDateTime finishTime;
     private AuctionType auctionType;
     private String description;
+    private Integer owner_id;
 
     private List<Lot> lots = new ArrayList<>();
 
     public Auction() {
     }
 
-    public Auction(int id, LocalDateTime startTime, LocalDateTime finishTime, AuctionType auctionType, String description) {
+    public Auction(int id, LocalDateTime startTime, LocalDateTime finishTime, AuctionType auctionType, String description, Integer owner_id) {
         super(id);
         this.startTime = startTime;
         this.finishTime = finishTime;
         this.auctionType = auctionType;
         this.description = description;
+        this.owner_id = owner_id;
     }
 
-    public Auction(int id, LocalDateTime startTime, LocalDateTime finishTime, AuctionType auctionType) {
+    public Auction(int id, LocalDateTime startTime, LocalDateTime finishTime, AuctionType auctionType, Integer owner_id) {
         super(id);
         this.startTime = startTime;
         this.finishTime = finishTime;
         this.auctionType = auctionType;
+        this.owner_id = owner_id;
     }
 
-    public Auction(LocalDateTime startTime, LocalDateTime finishTime, AuctionType auctionType, String description) {
+    public Auction(LocalDateTime startTime, LocalDateTime finishTime, AuctionType auctionType, String description, Integer owner_id) {
         this.startTime = startTime;
         this.finishTime = finishTime;
         this.auctionType = auctionType;
         this.description = description;
+        this.owner_id = owner_id;
     }
 
     public LocalDateTime getStartTime() {
@@ -77,6 +81,14 @@ public class Auction extends Bean {
         this.lots = lots;
     }
 
+    public Integer getOwner_id() {
+        return owner_id;
+    }
+
+    public void setOwner_id(Integer owner_id) {
+        this.owner_id = owner_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,6 +99,7 @@ public class Auction extends Bean {
                 startTime.equals(auction.startTime) &&
                 finishTime.equals(auction.finishTime) &&
                 description.equals(auction.description)) &&
+                owner_id == auction.owner_id &&
                 lots.equals(auction.lots);
     }
 
@@ -98,6 +111,7 @@ public class Auction extends Bean {
         result = prime * result + (startTime != null ? startTime.hashCode() : 0);
         result = prime * result + (finishTime != null ? finishTime.hashCode() : 0);
         result = prime * result + (description != null ? description.hashCode() : 0);
+        result = prime * result + owner_id;
         result = prime * result + (lots != null ? lots.hashCode() : 0);
         return result;
     }
@@ -109,6 +123,7 @@ public class Auction extends Bean {
                 ", finishTime=" + finishTime +
                 ", auctionType=" + auctionType +
                 ", description='" + description + '\'' +
+                ", owner id='" + owner_id + '\'' +
                 ", lots=" + lots +
                 '}';
     }

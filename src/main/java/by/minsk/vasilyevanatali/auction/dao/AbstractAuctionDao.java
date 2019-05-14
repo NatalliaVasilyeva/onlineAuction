@@ -30,7 +30,7 @@ public abstract class AbstractAuctionDao extends AbstractDao<Auction> {
 
     @Override
     public String getSelectQueryById() {
-        return "SELECT auction_id, start_time, finish_time, auction_type, description FROM auctionDB.auction WHERE auction.auction_id = ?;";
+        return "SELECT auction_id, start_time, finish_time, auction_type, description, owner_id FROM auctionDB.auction join auctionDB.user on auction.owner_id=user.user_id WHERE auction.auction_id = ?;";
     }
 
     @Override
@@ -40,7 +40,7 @@ public abstract class AbstractAuctionDao extends AbstractDao<Auction> {
 
     @Override
     public String getCreateQuery() {
-        return "INSERT INTO auctionDB.auction (start_time, finish_time, auction_type, description) VALUES (?, ?, ?, ?);";
+        return "INSERT INTO auctionDB.auction (start_time, finish_time, auction_type, description, owner_id) VALUES (?, ?, ?, ?, ?);";
     }
 
     @Override
@@ -59,6 +59,10 @@ public abstract class AbstractAuctionDao extends AbstractDao<Auction> {
     }
 
     public abstract String getSelectCountAuctionsQuery();
+
+    public abstract String getSelectUserAuctionsAllQuery();
+
+    public abstract String getSelectMaxUserAuctionIdQuery();
 
     protected abstract List<Auction> parseResultSet(ResultSet resultSet, List<Auction> auctions) throws DaoException;
 

@@ -31,6 +31,7 @@ public class AuctionDao extends AbstractAuctionDao {
         statement.setTimestamp(2, Timestamp.valueOf(auction.getFinishTime()));
         statement.setString(3, auction.getAuctionType().getName());
         statement.setString(4, auction.getDescription());
+        statement.setInt(5, auction.getOwner_id());
         rowChangeNumber = statement.executeUpdate();
         return rowChangeNumber == 1;
     }
@@ -78,9 +79,57 @@ public class AuctionDao extends AbstractAuctionDao {
         return optionalCount.orElseThrow(() -> new DaoException("Null auction count"));
     }
 
+    public List<Auction> getUsersAllAuctions(Integer ownerId) throws SQLException, DaoException {
+        LOGGER.debug("Auction DAO looking for auctions of :" + ownerId + " user id");
+        List<Auction> auctions = new ArrayList<>();
+        try (ProxyConnection proxyConnection = connectionPool.getConnection();
+             PreparedStatement preparedStatement = proxyConnection.prepareStatement(getSelectUserAuctionsAllQuery())) {
+            preparedStatement.setInt(1, ownerId);
+            LOGGER.trace("Request was sent.");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            auctions = parseResultSet(resultSet, auctions);
+
+            return auctions;
+        } catch (ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
+
+    }
+
+
+
+    public Integer getMaxIdOfUserAuctions(Integer ownerId) throws DaoException {
+        LOGGER.debug("Request for max id of this user auctions");
+        Optional<Integer> optionalId = Optional.empty();
+        try (ProxyConnection proxyConnection = connectionPool.getConnection();
+             PreparedStatement preparedStatement = proxyConnection.prepareStatement(getSelectMaxUserAuctionIdQuery())) {
+            preparedStatement.setInt(1, ownerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Integer id = resultSet.getInt(1);
+                optionalId = Optional.of(id);
+                LOGGER.debug("Auctions  max id: " + id);
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
+        return optionalId.orElseThrow(() -> new DaoException("Null auction max id"));
+    }
+
+
 
     public String getSelectCountAuctionsQuery() {
         return "SELECT COUNT(auction_id) FROM auctionDB.auction WHERE finish_time > now();";
+    }
+
+    @Override
+    public String getSelectUserAuctionsAllQuery() {
+        return "SELECT auction_id, start_time, finish_time, auction_type, description, owner_id FROM auctionDB.auction join auctionDB.user on auction.owner_id=user.user_id WHERE  owner_id=?;";
+    }
+
+    @Override
+    public String getSelectMaxUserAuctionIdQuery(){
+        return "SELECT max(auction_id) from (select auction_id from auction where owner_id=?) as S;";
     }
 
     protected void setAuctionParameters(Auction auction, ResultSet resultSet) throws DaoException, SQLException {
@@ -91,6 +140,7 @@ public class AuctionDao extends AbstractAuctionDao {
                 ZoneId.systemDefault()));
         auction.setAuctionType(AuctionType.valueOf((resultSet.getString("auction_type")).toUpperCase()));
         auction.setDescription(resultSet.getString("description"));
+        auction.setOwner_id(resultSet.getInt("owner_id"));
     }
 
     protected List<Auction> parseResultSet(ResultSet resultSet, List<Auction> auctions) throws DaoException {

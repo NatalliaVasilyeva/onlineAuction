@@ -14,8 +14,9 @@ import by.minsk.vasilyevanatali.auction.command.user.*;
 public enum CommandType {
     //   "approveLot", new ApproveLotCommand();
 //        "blockUser", new BlockUserCommand());
-//       "createAuction", new CreateAuctionCommand());
-//        "unApproveLot", new UnapproveLotCommand());
+    ADD_AUCTION(new AddAuctionCommand()),
+    MY_AUCTION(new ShowMyAuctionsCommand()),
+    //        "unApproveLot", new UnapproveLotCommand());
 //        "unBlockedUser", new UnBlockedUserCommand());
 //        "addFunds", new AddFundsCommand());
 //        "editUser", new EditUserCommand());

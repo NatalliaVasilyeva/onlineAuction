@@ -109,175 +109,187 @@
 <jsp:include page="../header/header.jsp"/>
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="col-6">
-            <table class="table table-bordered" id="lot-table">
-                <h1><fmt:message key="user.business-profile.my-lots.captions"/></h1>
-                <thead>
-                <tr>
-                    <th><fmt:message key="th.business-profile.my-lots-th.image"/></th>
-                    <th><fmt:message key="th.id.my-lots"/></th>
-                    <th><fmt:message key="user.business-profile.my-lots-th.name"/></th>
-                    <th><fmt:message key="user.business-profile.my-lots-th.description"/></th>
-                    <th><fmt:message key="th.business-profile.my-lots-th.category"/></th>
-                    <th><fmt:message key="th.id.auction"/></th>
-                    <th><fmt:message key="th.action-start-time"/></th>
-                    <th><fmt:message key="th.action-finish-time"/></th>
-                    <th><fmt:message key="th.business-profile.my-lots-th.blocked"/></th>
-                    <th><fmt:message key="th.business-profile.my-lots-th.paid"/></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${requestScope.myLots}" var="lot">
-                    <tr>
-                        <td>
-                            <img src="${lot.imagePath}">
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${lot.id}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${lot.name}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${lot.description}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${lot.category}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${lot.auctionId}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${f:formatLocalDateTime(lot.startTime, 'HH:mm dd.MM.yyyy')}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${f:formatLocalDateTime(lot.finishTime, 'HH:mm dd.MM.yyyy')}
-                            </div>
 
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${lot.isBlocked}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${lot.isPaid}
-                            </div>
-                        </td>
-                        <td width=20%>
-                            <button type=button class="btn btn-light" onclick="editLot(this)"><span
-                                    class="fa fa-pencil"></span> <fmt:message
-                                    key="business-profile.my-lots.edit-button"/>
-                            </button>
-                            <button type=button class="btn btn-light" onclick="removeLot(this)"><span
-                                    class="fa fa-trash"></span><fmt:message
-                                    key="business-profile.my-lots.delete-button"/>
-                            </button>
-                        </td>
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="showMylots()">My lots</button>
+
+        <div class="row top-buffer" id="show-my-lots" style="display: none">
+            <div class="col-6">
+                <table class="table table-bordered" id="lot-table">
+                    <h1><fmt:message key="user.business-profile.my-lots.captions"/></h1>
+                    <thead>
+                    <tr>
+                        <th><fmt:message key="th.business-profile.my-lots-th.image"/></th>
+                        <th><fmt:message key="th.id.my-lots"/></th>
+                        <th><fmt:message key="user.business-profile.my-lots-th.name"/></th>
+                        <th><fmt:message key="user.business-profile.my-lots-th.description"/></th>
+                        <th><fmt:message key="th.business-profile.my-lots-th.category"/></th>
+                        <th><fmt:message key="th.id.auction"/></th>
+                        <th><fmt:message key="th.action-start-time"/></th>
+                        <th><fmt:message key="th.action-finish-time"/></th>
+                        <th><fmt:message key="th.business-profile.my-lots-th.blocked"/></th>
+                        <th><fmt:message key="th.business-profile.my-lots-th.paid"/></th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${requestScope.myLots}" var="lot">
+                        <tr>
+                            <td>
+                                <img src="${lot.imagePath}">
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${lot.id}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${lot.name}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${lot.description}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${lot.category}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${lot.auctionId}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${f:formatLocalDateTime(lot.startTime, 'HH:mm dd.MM.yyyy')}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${f:formatLocalDateTime(lot.finishTime, 'HH:mm dd.MM.yyyy')}
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${lot.isBlocked}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${lot.isPaid}
+                                </div>
+                            </td>
+                            <td width=20%>
+                                <button type=button class="btn btn-light" onclick="editLot(this)"><span
+                                        class="fa fa-pencil"></span> <fmt:message
+                                        key="business-profile.my-lots.edit-button"/>
+                                </button>
+                                <button type=button class="btn btn-light" onclick="removeLot(this)"><span
+                                        class="fa fa-trash"></span><fmt:message
+                                        key="business-profile.my-lots.delete-button"/>
+                                </button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
     <div class="row-fluid">
-        <div class="col-6">
-            <table class="table table-bordered" id="bid-table">
-                <h1><fmt:message key="user.business-profile.my-bids.captions"/></h1>
-                <thead>
-                <tr>
-                    <th><fmt:message key="th.business-profile.my-lots-th.image"/></th>
-                    <th><fmt:message key="th.id.my-lots"/></th>
-                    <th><fmt:message key="user.business-profile.my-lots-th.name"/></th>
-                    <th><fmt:message key="user.business-profile.my-lots-th.description"/></th>
-                    <th><fmt:message key="th.business-profile.my-lots-th.category"/></th>
-                    <th><fmt:message key="th.id.auction"/></th>
-                    <th><fmt:message key="th.action-start-time"/></th>
-                    <th><fmt:message key="th.action-finish-time"/></th>
-                    <th><fmt:message key="th.business-profile.my-lots-th.blocked"/></th>
-                    <th><fmt:message key="th.business-profile.my-lots-th.paid"/></th>
-                    <th><fmt:message key="th.business-profile.my-bids-th.ownerId"/></th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${requestScope.myBidLots}" var="bidLot">
-                    <tr>
-                        <td>
-                            <img src="${bidLot.imagePath}">
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${bidLot.id}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${bidLot.name}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${bidLot.description}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${bidLot.category}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${bidLot.auctionId}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${f:formatLocalDateTime(bidLot.startTime, 'HH:mm dd.MM.yyyy')}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${f:formatLocalDateTime(bidLot.finishTime, 'HH:mm dd.MM.yyyy')}
-                            </div>
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="showMyBids()">My bids</button>
 
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${bidLot.isBlocked}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${bidLot.isPaid}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="data">
-                                    ${bidLot.sellerId}
-                            </div>
-                        </td>
+        <%--        <div class="row-fluid" id="show-my-bids" style="display: none">--%>
+        <div class="row top-buffer" id="show-my-bids" style="display: none">
+            <div class="col-6">
+                <table class="table table-bordered" id="bid-table">
+                    <h1><fmt:message key="user.business-profile.my-bids.captions"/></h1>
+                    <thead>
+                    <tr>
+                        <th><fmt:message key="th.business-profile.my-lots-th.image"/></th>
+                        <th><fmt:message key="th.id.my-lots"/></th>
+                        <th><fmt:message key="user.business-profile.my-lots-th.name"/></th>
+                        <th><fmt:message key="user.business-profile.my-lots-th.description"/></th>
+                        <th><fmt:message key="th.business-profile.my-lots-th.category"/></th>
+                        <th><fmt:message key="th.id.auction"/></th>
+                        <th><fmt:message key="th.action-start-time"/></th>
+                        <th><fmt:message key="th.action-finish-time"/></th>
+                        <th><fmt:message key="th.business-profile.my-lots-th.blocked"/></th>
+                        <th><fmt:message key="th.business-profile.my-lots-th.paid"/></th>
+                        <th><fmt:message key="th.business-profile.my-bids-th.ownerId"/></th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${requestScope.myBidLots}" var="bidLot">
+                        <tr>
+                            <td>
+                                <img src="${bidLot.imagePath}">
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${bidLot.id}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${bidLot.name}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${bidLot.description}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${bidLot.category}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${bidLot.auctionId}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${f:formatLocalDateTime(bidLot.startTime, 'HH:mm dd.MM.yyyy')}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${f:formatLocalDateTime(bidLot.finishTime, 'HH:mm dd.MM.yyyy')}
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${bidLot.isBlocked}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${bidLot.isPaid}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="data">
+                                        ${bidLot.sellerId}
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-</div>
+
+
 <div class="modal fade" id="edit-lot-modal">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -5,7 +5,7 @@ function editLotServerCall() {
     let lotName = $("#edit-lot-name-input").val();
     let lotDescription = $("#edit-lot-description-input").val();
     let lotCategory = $("#edit-lot-category-input").val();
-    const isValid = validateEditLotForm(name, value);
+    const isValid = validateEditLotForm(lotName, lotDescription,lotCategory);
     if (!isValid) {
         return;
     }

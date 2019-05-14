@@ -6,6 +6,7 @@ import by.minsk.vasilyevanatali.auction.dao.exception.DaoException;
 import by.minsk.vasilyevanatali.auction.dao.impl.AuctionDao;
 import by.minsk.vasilyevanatali.auction.entity.Auction;
 import by.minsk.vasilyevanatali.auction.entity.AuctionType;
+import by.minsk.vasilyevanatali.auction.entity.User;
 import by.minsk.vasilyevanatali.auction.service.exception.ServiceException;
 import by.minsk.vasilyevanatali.auction.util.builder.AuctionBuilder;
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +21,7 @@ public class AuctionService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
     private static final Logger LOGGER = LogManager.getLogger(AuctionService.class);
- AuctionBuilder auctionBuilder = new AuctionBuilder();
+    AuctionBuilder auctionBuilder = new AuctionBuilder();
 
     public Optional<List<Auction>> getAllAuction() throws ServiceException {
         LOGGER.debug("Service looking for lot entities");
@@ -35,7 +36,7 @@ public class AuctionService {
         return optionalAuctionList;
     }
 
-    public boolean createAuction(LocalDateTime startTime, LocalDateTime finishTime, AuctionType type, String description) throws ServiceException {
+    public boolean createAuction(LocalDateTime startTime, LocalDateTime finishTime, AuctionType type, String description, Integer ownerId) throws ServiceException {
         LOGGER.debug("Service creates lot:");
         boolean isAuctionCreated = false;
         AuctionDao auctionDao = daoFactory.getAuctionDao();
@@ -44,10 +45,11 @@ public class AuctionService {
                     .withFinishTime(finishTime)
                     .withAuctionType(type)
                     .withDescription(description)
+                    .byOwnerId(ownerId)
                     .build();
 //            Auction auction = new Auction(startTime, finishTime, type, description);
             isAuctionCreated = auctionDao.create(auction);
-                 LOGGER.debug("Auction was created");
+            LOGGER.debug("Auction was created");
         } catch (SQLException | DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
@@ -68,5 +70,31 @@ public class AuctionService {
         return auctionOptional;
     }
 
+
+    public Optional<List<Auction>> getAllUsersAuction(User user) throws ServiceException {
+        LOGGER.debug("Service looking for auctions entities");
+        Optional<List<Auction>> optionalAuctionList = Optional.empty();
+        AuctionDao auctionDao = daoFactory.getAuctionDao();
+        try {
+            optionalAuctionList = Optional.ofNullable(auctionDao.getUsersAllAuctions(user.getId()));
+            LOGGER.debug("Service returns optional auction entities");
+        } catch (DaoException | SQLException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+        return optionalAuctionList;
+    }
+
+    public Optional<Integer> getMaxIdOfUserAuctions(User user) throws ServiceException {
+        LOGGER.debug("Service looking for maximum id of users auction");
+        Optional<Integer> optionalMaxIAuctionId = Optional.empty();
+        AuctionDao auctionDao = daoFactory.getAuctionDao();
+        try {
+            optionalMaxIAuctionId = Optional.ofNullable(auctionDao.getMaxIdOfUserAuctions(user.getId()));
+            LOGGER.debug("Service returns optional max auction id of this user");
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+        return optionalMaxIAuctionId;
+    }
 
 }

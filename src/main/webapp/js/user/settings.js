@@ -1,10 +1,3 @@
-// function setInitialLocale(locale) {
-//     console.log(locale);
-//     const isEnglish = locale === 'EN';
-//     $('#locale-select option[value="EN"]').prop('selected', isEnglish);
-//     $('#locale-select option[value="RU"]').prop('selected', !isEnglish);
-// }
-
 function changeLocale(select) {
     console.log(select.value);
     $.post('change-language',
@@ -19,10 +12,22 @@ function changePassword() {
     $('#save-new-password-div').show();
 }
 
+function changeLanguage() {
+    $('#change-language-div').hide();
+    $('#save-new-language-div').show();
+}
+
+
 function cancelChangePassword() {
     $('#change-password-div').show();
     $('#save-new-password-div').hide();
 }
+
+function cancelChangeLanguage() {
+    $('#change-language-div').show();
+    $('#save-new-language-div').hide();
+}
+
 
 function changePasswordServerCall() {
     const oldPassword = $('#settings-old-password-input').val();
@@ -38,7 +43,7 @@ function changePasswordServerCall() {
             newPassword: newPassword,
             confirmNewPassword: confirmNewPassword
         },
-        // data => onSuccessfulChangePassword(data)
+        data => onSuccessfulChangePassword(data),
         () => location.reload());
     // );
 }
@@ -74,8 +79,8 @@ function validateChangePasswordForm(oldPassword, newPassword, confirmNewPassword
 function onSuccessfulChangePassword(data) {
     // let json = JSON.parse(data);
     // if ($.isEmptyObject(json)) {
-        clearSettingsInput();
-        cancelChangePassword();
+    clearSettingsInput();
+    cancelChangePassword();
     // } else {
     //     showSettingsErrors(json['oldPasswordError'], json['newPasswordError'], json['confirmNewPasswordError']);
     // }

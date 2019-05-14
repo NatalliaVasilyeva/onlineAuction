@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @WebFilter(filterName = "AdminAccess",
         urlPatterns = {
-                "/block-user", "/unblock-user", "/approve-lot", "/unapprove-lot", "/create-auction",
+                "/block-user", "/unblock-user", "/approve-lot", "/unapprove-lot",
                 "/edit-auction",
                 "/manage-auctions", "/manage-requests", "/manage-users",
                 "/remove-auction", "/remove-user"

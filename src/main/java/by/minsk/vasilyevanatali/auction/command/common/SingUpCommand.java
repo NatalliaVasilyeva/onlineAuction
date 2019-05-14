@@ -31,10 +31,6 @@ public class SingUpCommand implements Command {
      */
     @Override
     public String execute(HttpServletRequest req) {
-        String validationMessage = null;
-        String validationMessage1 = null;
-        String validationMessage2 = null;
-        List<String> message = new ArrayList<>();
 
         try {
             var login = new LoginParser().parse(req.getParameter("login"));
@@ -50,36 +46,32 @@ public class SingUpCommand implements Command {
             UserService userService = ServiceFactory.getInstance().getUserService();
             System.out.println("take user service");
             if (checkPasswordMatch(password, repeatPassword, req)) {
-              System.out.println("take check password");
+                System.out.println("take check password");
 //                if (userService.findUserByLogin(login)) {
 
                 if (!userService.findUserByLoginReturnUser(login)) {
                     System.out.println("take check login");
                     User user = userService.createUser(login, firstName, lastName, email, phone, password);
                     if (null != user) {
-                        setBuyerSessionAttributes(req, user);
+                        setUserSessionAttributes(req, user);
                     }
-                } else{
+                } else {
                     System.out.println("login is present");
                 }
             } else {
-                validationMessage = "This login is busy. Please, try again";
-                validationMessage1 = "This login is busy. Please, try again";
-                validationMessage2 = "This login is busy. Please, try again";
-                message.add(validationMessage);
-                message.add(validationMessage1);
-                message.add(validationMessage2);
-                message.toArray();
+                String validationMessage = "This login is busy. Please, try again";
+                req.setAttribute("errorMessage", validationMessage);
+
             }
 
         } catch (ServiceException | WrongInputException e) {
             e.printStackTrace();
         }
-        return new Gson().toJson(message);
+        return "welcome";
     }
 
 
-    private void setBuyerSessionAttributes(HttpServletRequest req, User user) {
+    private void setUserSessionAttributes(HttpServletRequest req, User user) {
 
         req.getSession().setAttribute("login", user.getLogin());
         req.getSession().setAttribute("role", user.getRole());

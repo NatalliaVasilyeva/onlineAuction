@@ -20,3 +20,12 @@ function removeLot(button) {
         () => tr.remove()
     )
 }
+
+function showMylots() {
+    $('#show-my-lots').toggle();
+}
+
+function showMyBids() {
+    $('#show-my-bids').toggle();
+}
+
