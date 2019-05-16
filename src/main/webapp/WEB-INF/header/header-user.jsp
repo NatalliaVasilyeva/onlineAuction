@@ -97,7 +97,7 @@
 </nav>
 <form id="profile-form" action="profile" method="get"></form>
 <form id="business-profile-form" action="business-profile" method="post"></form>
-<form id="my-auction-form" action="my-auction" method="post"></form>
+<form id="my-auction-form" action="my-auctions" method="post"></form>
 <form id="settings-form" action="settings" method="get"></form>
 <form id="welcome-form" action="welcome" method="get"></form>
 <form id="add-auction-form" action="add-auction" method="get"></form>

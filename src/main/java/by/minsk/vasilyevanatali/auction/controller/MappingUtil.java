@@ -30,7 +30,7 @@ import java.util.Map;
                 "edit-lot", "edit-profile", "make-bid",
                 "manage-auctions", "manage-requests", "manage-users",
                 "profile", "remove-auction", "delete-lot", "remove-user",
-                "sign-in", "sign-out", "sign-up", "add-funds", "withdraw-funds", "change-language", "my-auction"
+                "sign-in", "sign-out", "sign-up", "add-funds", "withdraw-funds", "change-language", "my-auctions"
         })
 class MappingUtil {
 
@@ -49,7 +49,7 @@ class MappingUtil {
         mappingUriJsp.put("settings", "WEB-INF/user/settings.jsp");
         mappingUriJsp.put("welcome", "WEB-INF/guest/welcome.jsp");
         mappingUriJsp.put("add-auction", "WEB-INF/user/add-auction.jsp");
-        mappingUriJsp.put("user-auction", "WEB-INF/user/user-auction.jsp");
+        mappingUriJsp.put("user-auctions", "WEB-INF/user/user-auctions.jsp");
     }
 
     /**

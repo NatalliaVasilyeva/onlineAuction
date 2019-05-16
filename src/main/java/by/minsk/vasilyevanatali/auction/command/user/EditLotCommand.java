@@ -34,7 +34,7 @@ public class EditLotCommand implements Command {
 
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
-        if (user != null) {
+        if (user != null && user.getRole().equals("USER")) {
             try {
                 int lotId = new IdParser().parse((req.getParameter("lotId")));
                 String lotName = new StringParser().parse(req.getParameter("lotName"));

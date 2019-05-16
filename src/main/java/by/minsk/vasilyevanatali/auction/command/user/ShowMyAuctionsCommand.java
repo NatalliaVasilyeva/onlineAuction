@@ -63,7 +63,7 @@ public class ShowMyAuctionsCommand implements Command {
             } catch (AuthenticationException e) {
                 e.printStackTrace();
             }
-            page = "user-auction";
+            page = "user-auctions";
         }
         return page;
     }

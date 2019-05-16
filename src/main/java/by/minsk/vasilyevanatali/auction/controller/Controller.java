@@ -23,7 +23,7 @@ import static by.minsk.vasilyevanatali.auction.controller.MappingUtil.unfoldExce
  */
 @WebServlet(name = "Controller",
         urlPatterns = {"/welcome", "/sign-up", "/sign-in", "/sign-out", "/profile", "/edit-profile", "/change-language", "/settings", "/change-password", "/business-profile",
-                "/add-auction", "/my-auction"
+                "/add-auction", "/my-auctions", "/edit-auction"
                 //"",
 //        "/sign-out", "/profile", "/edit-profile", "/manage-auctions",
 //        "/manage-requests", "/manage-users", "/block-user", "/unblock-user",

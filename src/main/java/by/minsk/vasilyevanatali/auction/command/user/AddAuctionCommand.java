@@ -53,7 +53,7 @@ public class AddAuctionCommand implements Command {
         User user = (User) session.getAttribute("user");
 
 
-        if (user != null && user.getRole() == Role.USER) {
+        if (user != null && user.getRole() == Role.USER && user.getIsBlocked()!=0) {
             try {
                 new UserValidation().checkCredentials(user, Role.USER, req);
 

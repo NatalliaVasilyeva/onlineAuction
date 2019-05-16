@@ -45,7 +45,7 @@ public abstract class AbstractAuctionDao extends AbstractDao<Auction> {
 
     @Override
     public String getUpdateQuery() {
-        return null;
+        return "UPDATE auctionDB.auction SET start_time=?, finish_time=?, description=? WHERE `auction_id`=?";
     }
 
     @Override

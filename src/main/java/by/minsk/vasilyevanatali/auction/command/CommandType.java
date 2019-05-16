@@ -15,7 +15,8 @@ public enum CommandType {
     //   "approveLot", new ApproveLotCommand();
 //        "blockUser", new BlockUserCommand());
     ADD_AUCTION(new AddAuctionCommand()),
-    MY_AUCTION(new ShowMyAuctionsCommand()),
+    MY_AUCTIONS(new ShowMyAuctionsCommand()),
+    EDIT_AUCTION(new EditAuctionCommand()),
     //        "unApproveLot", new UnapproveLotCommand());
 //        "unBlockedUser", new UnBlockedUserCommand());
 //        "addFunds", new AddFundsCommand());

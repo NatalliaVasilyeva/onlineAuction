@@ -23,9 +23,9 @@ import java.io.IOException;
                 "/propose-lot", "/business-profile",
                 "/change-locale", "/change-password",
                 "/edit-lot", "/edit-profile", "/make-bid",
-                "/add-funds", "/withdraw-funds",
+                "/add-funds", "/withdraw-funds", "/edit-auction",
                 "/profile", "/delete-lot",
-                "/sign-out", "/add-auction", "/my-auction"
+                "/sign-out", "/add-auction", "/my-auctions"
         })
 public class UserAccessFilter implements Filter {
 

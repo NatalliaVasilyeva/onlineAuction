@@ -34,4 +34,23 @@ public class DateTimeParser implements Parser<LocalDateTime> {
 		}
         return datetimeOptional.orElseThrow(() -> new WrongInputException("Non-valid datetime provided:" + datetime));
 	}
+
+
+	public LocalDateTime parseEditAuction(String datetime) throws WrongInputException {
+		LOGGER.debug("Parse datetime: " + datetime);
+		Optional<LocalDateTime> datetimeOptional = Optional.empty();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+		if(datetime != null && !datetime.trim().isEmpty()) {
+			try {
+				LocalDateTime value = LocalDateTime.parse(datetime.trim(), formatter);
+
+					datetimeOptional = Optional.of(value);
+
+			} catch (DateTimeParseException e) {
+				LOGGER.error(e);
+			}
+		}
+		return datetimeOptional.orElseThrow(() -> new WrongInputException("Non-valid datetime provided:" + datetime));
+	}
 }

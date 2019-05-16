@@ -37,7 +37,7 @@ public class AuctionService {
     }
 
     public boolean createAuction(LocalDateTime startTime, LocalDateTime finishTime, AuctionType type, String description, Integer ownerId) throws ServiceException {
-        LOGGER.debug("Service creates lot:");
+        LOGGER.debug("Service creates auction:");
         boolean isAuctionCreated = false;
         AuctionDao auctionDao = daoFactory.getAuctionDao();
         try {
@@ -96,5 +96,24 @@ public class AuctionService {
         }
         return optionalMaxIAuctionId;
     }
+
+    public boolean updateAuction(Integer auctionId, LocalDateTime startTime, LocalDateTime finishTime, String description) throws ServiceException {
+        LOGGER.debug("Service update auction:");
+        boolean isAuctionCreated = false;
+        AuctionDao auctionDao = daoFactory.getAuctionDao();
+        try {
+            Auction auction = findAuctionById(auctionId).get();
+            auction.setStartTime(startTime);
+            auction.setFinishTime(finishTime);
+            auction.setDescription(description);
+
+            isAuctionCreated = auctionDao.update(auction);
+            LOGGER.debug("Auction was updated");
+        } catch (SQLException | DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+        return isAuctionCreated;
+    }
+
 
 }

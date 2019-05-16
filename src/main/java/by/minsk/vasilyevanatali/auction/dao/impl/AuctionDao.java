@@ -38,7 +38,13 @@ public class AuctionDao extends AbstractAuctionDao {
 
     @Override
     protected boolean prepareStatementForUpdate(PreparedStatement statement, Auction auction) throws SQLException {
-        return false;
+        int rowChangeNumber = 0;
+        statement.setTimestamp(1, Timestamp.valueOf(auction.getStartTime()));
+        statement.setTimestamp(2, Timestamp.valueOf(auction.getFinishTime()));
+        statement.setString(3, auction.getDescription());
+        statement.setInt(4, auction.getId());
+        rowChangeNumber = statement.executeUpdate();
+        return rowChangeNumber == 1;
     }
 
     @Override
@@ -97,7 +103,6 @@ public class AuctionDao extends AbstractAuctionDao {
     }
 
 
-
     public Integer getMaxIdOfUserAuctions(Integer ownerId) throws DaoException {
         LOGGER.debug("Request for max id of this user auctions");
         Optional<Integer> optionalId = Optional.empty();
@@ -117,7 +122,6 @@ public class AuctionDao extends AbstractAuctionDao {
     }
 
 
-
     public String getSelectCountAuctionsQuery() {
         return "SELECT COUNT(auction_id) FROM auctionDB.auction WHERE finish_time > now();";
     }
@@ -128,7 +132,7 @@ public class AuctionDao extends AbstractAuctionDao {
     }
 
     @Override
-    public String getSelectMaxUserAuctionIdQuery(){
+    public String getSelectMaxUserAuctionIdQuery() {
         return "SELECT max(auction_id) from (select auction_id from auction where owner_id=?) as S;";
     }
 
