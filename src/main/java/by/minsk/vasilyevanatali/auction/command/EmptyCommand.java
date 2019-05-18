@@ -31,7 +31,7 @@ public class EmptyCommand implements Command {
 
 @Override
 public String execute(HttpServletRequest req) {
-        return "index.jsp";
+        return "welcome";
         }
 }
 

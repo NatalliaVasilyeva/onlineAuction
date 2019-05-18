@@ -53,7 +53,7 @@ public abstract class AbstractUserDao extends AbstractDao<User> {
 
     @Override
     public String getDeleteByIdQuery() {
-        return "DELETE FROM auctionDB.user where id_user = ?";
+        return "DELETE FROM auctionDB.user where user_id = ?";
     }
 
     public abstract String getUpdatePasswordQuery();

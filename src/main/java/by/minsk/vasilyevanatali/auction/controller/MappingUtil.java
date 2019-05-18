@@ -24,7 +24,7 @@ import java.util.Map;
                 "manage-auctions", "manage-users", "manage-requests",
                 "profile", "settings", "welcome", "add-auction"
         },
-        posts = {"", "block-user", "unblock-user", "approve-lot", "unapprove-lot", "add-auction",
+        posts = {"", "block-user", "unblock-user", "approve-lot", "unapprove-lot", "add-auction", "delete-auction",
                 "propose-lot", "business-profile",
                 "change-locale", "change-password", "edit-auction",
                 "edit-lot", "edit-profile", "make-bid",

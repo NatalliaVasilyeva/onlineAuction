@@ -17,6 +17,7 @@ public enum CommandType {
     ADD_AUCTION(new AddAuctionCommand()),
     MY_AUCTIONS(new ShowMyAuctionsCommand()),
     EDIT_AUCTION(new EditAuctionCommand()),
+    DELETE_AUCTION(new DeleteAuctionCommand()),
     //        "unApproveLot", new UnapproveLotCommand());
 //        "unBlockedUser", new UnBlockedUserCommand());
 //        "addFunds", new AddFundsCommand());

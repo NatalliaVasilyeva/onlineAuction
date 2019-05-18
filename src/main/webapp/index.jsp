@@ -4,7 +4,7 @@
 
 <html>
 <body>
-<jsp:forward page="/WEB-INF/guest/welcome.jsp"/>
+<jsp:forward page="WEB-INF/guest/welcome.jsp"/>
 
 </body>
 </html>

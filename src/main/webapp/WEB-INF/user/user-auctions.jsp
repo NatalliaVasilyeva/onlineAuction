@@ -37,32 +37,44 @@
                                 <table table-editable id="edit-auction-card-last-auction-table">
                                     <tr>
                                         <td><fmt:message key="business-profile.user.auction-set.id"/>:</td>
-                                        <td contenteditable="false">
-                                            <input type="text" class="form-control" id="my-last-auction-id" name="auction_id"
-                                                   value="${lastAuction.id}" readonly/>
-<%--                                            ${lastAuction.id}</td>--%>
+                                        <%--                                        <td contenteditable="false">--%>
+                                        <td><input type="text" class="form-control" id="my-last-auction-id"
+                                                   name="auction_id"
+                                                   value="${lastAuction.id}" readonly/></td>
+                                        <%--                                            ${lastAuction.id}</td>--%>
                                     </tr>
                                     <tr>
                                         <td><fmt:message key="business-profile.user.auction-set.since"/>:</td>
-                                        <td contenteditable="false" id="my-last-auction-start-time1">
-
-                                            ${f:formatLocalDateTime(lastAuction.startTime, 'HH:mm dd.MM.yyyy')}</td>
+                                        <%--                                        <td contenteditable="false" id="my-last-auction-start-time1">--%>
+                                        <td><input type="text" class="form-control"
+                                                   id="my-last-auction-start-time" name="auction-start-time"
+                                                   value="${f:formatLocalDateTime(lastAuction.startTime, "yyyy-MM-dd'T'HH:mm")}"
+                                                   readonly/></td>
+                                        <%--                                            ${f:formatLocalDateTime(lastAuction.startTime, 'HH:mm dd.MM.yyyy')}</td>--%>
                                     </tr>
                                     <tr>
                                         <td><fmt:message key="business-profile.user.auction-set.untill"/>:</td>
-                                        <td contenteditable="false" id="my-last-auction-finish-time1">
-
-                                            ${f:formatLocalDateTime(lastAuction.finishTime, 'HH:mm dd.MM.yyyy')}</td>
+                                        <%--                                        <td contenteditable="false" id="my-last-auction-finish-time1">--%>
+                                        <td><input type="text" class="form-control"
+                                                   id="my-last-auction-finish-time" name="auction-finish-time"
+                                                   value="${f:formatLocalDateTime(lastAuction.finishTime, "yyyy-MM-dd'T'HH:mm")}"
+                                                   readonly/></td>
+                                        <%--                                            ${f:formatLocalDateTime(lastAuction.finishTime, 'HH:mm dd.MM.yyyy')}</td>--%>
                                     </tr>
                                     <tr>
                                         <td><fmt:message key="business-profile.user.auction-set.description"/>:</td>
-                                        <td contenteditable="false" id="my-last-auction-description1">
-
-                                            ${lastAuction.description}</td>
+                                        <%--                                        <td contenteditable="false" id="my-last-auction-description1">--%>
+                                        <td><input type="text" class="form-control" id="my-last-auction-description"
+                                                   name="auction-description"
+                                                   value="${lastAuction.description}" readonly/></td>
+                                        <%--                                            ${lastAuction.description}</td>--%>
                                     </tr>
                                     <tr>
                                         <td><fmt:message key="business-profile.user.auction-set.type"/>:</td>
-                                        <td>${lastAuction.auctionType}</td>
+                                        <td><input type="text" class="form-control" id="my-last-auction-type"
+                                                   name="auction_type"
+                                                   value="${lastAuction.auctionType}" readonly/></td>
+                                        <%--                                        <td>${lastAuction.auctionType}</td>--%>
                                     </tr>
                                 </table>
 
@@ -77,6 +89,7 @@
                                     </div>
                                     <div class="col-4">
                                         <input type="button" class="btn btn-outline-primary btn-block"
+                                               onclick="DeleteAuctionServerCall()"
                                                value=<fmt:message
                                                 key="business-profile.user.auction-set.delete-auction"/>/>
                                     </div>

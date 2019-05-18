@@ -21,7 +21,6 @@ public abstract class AbstractAuctionDao extends AbstractDao<Auction> {
     @Override
     protected abstract Auction prepareStatementForGetById(PreparedStatement statement) throws SQLException, DaoException;
 
-
     @Override
     protected abstract List<Auction> prepareStatementForGetAll(PreparedStatement statement) throws SQLException, DaoException;
 
@@ -50,7 +49,7 @@ public abstract class AbstractAuctionDao extends AbstractDao<Auction> {
 
     @Override
     public String getDeleteQuery() {
-        return null;
+        return "DELETE FROM auctionDB.auction where auction_id = ?";
     }
 
     @Override

@@ -55,7 +55,8 @@ public class EditAuctionCommand implements Command {
                 System.out.println(isAuctionEdit);
 
                 if (isAuctionEdit) {
-                    page = "user-auctions";
+             //       page = "user-auctions";
+                    page=new ShowMyAuctionsCommand().execute(req);
                 } else {
                     req.setAttribute("errorMessage", "Auction doesn't edit");
                     page = "welcome";

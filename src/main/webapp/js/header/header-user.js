@@ -23,9 +23,9 @@ function goToRequestAuction() {
 }
 
 function signOut() {
-    $.post("sign-out",
-        function () {
-            $("#welcome-form").submit()
-        }
+    $.post("sign-out"
+        // function () {
+        //     $("#welcome-form").submit()
+        // }
     )
 }

@@ -23,9 +23,10 @@ import java.io.IOException;
                 "/propose-lot", "/business-profile",
                 "/change-locale", "/change-password",
                 "/edit-lot", "/edit-profile", "/make-bid",
-                "/add-funds", "/withdraw-funds", "/edit-auction",
+                "/add-funds", "/withdraw-funds", "/edit-auction", "/delete-auction",
                 "/profile", "/delete-lot",
-                "/sign-out", "/add-auction", "/my-auctions"
+                 "/add-auction", "/my-auctions"
+              //  "/sign-out",
         })
 public class UserAccessFilter implements Filter {
 
@@ -51,7 +52,8 @@ public class UserAccessFilter implements Filter {
             }
         }
         logger.debug("Redirect");
-        resp.sendRedirect("welcome");
+      //  resp.sendRedirect("welcome");
+        resp.sendRedirect("");
     }
 
     @Override

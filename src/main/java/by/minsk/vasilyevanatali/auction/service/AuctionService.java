@@ -116,4 +116,18 @@ public class AuctionService {
     }
 
 
+    public boolean deleteAuctionById(Integer auctionId) throws ServiceException {
+        LOGGER.debug("Service delete auction:");
+        boolean isAuctionDelete = false;
+        AuctionDao auctionDao = daoFactory.getAuctionDao();
+        try {
+            isAuctionDelete = auctionDao.deleteById(auctionId);
+            LOGGER.debug("Auction was deleted");
+        } catch (SQLException | DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+        return isAuctionDelete;
+    }
+
+
 }

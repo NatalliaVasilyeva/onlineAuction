@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractDao<T extends Bean>  implements BaseDao<T> {
+public abstract class AbstractDao<T extends Bean> implements BaseDao<T> {
     private static final Logger LOGGER = LogManager.getLogger(AbstractDao.class);
 
     protected final ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -25,9 +25,11 @@ public abstract class AbstractDao<T extends Bean>  implements BaseDao<T> {
         statement.executeUpdate();
     }
 
-    private void prepareStatementForDeleteById(PreparedStatement statement, int id) throws SQLException {
+    private boolean prepareStatementForDeleteById(PreparedStatement statement, int id) throws SQLException {
+        int rowChangeNumber = 0;
         statement.setInt(1, id);
         statement.executeUpdate();
+        return rowChangeNumber == 1;
     }
 
     protected abstract boolean prepareStatementForUpdate(PreparedStatement statement, T object) throws SQLException;
@@ -85,14 +87,15 @@ public abstract class AbstractDao<T extends Bean>  implements BaseDao<T> {
 
 
     @Override
-    public void deleteById(int id) throws SQLException, DaoException {
+    public boolean deleteById(int id) throws SQLException, DaoException {
+        boolean isDelete;
         try (ProxyConnection proxyConnection = connectionPool.getConnection();
              PreparedStatement preparedStatement = proxyConnection.prepareStatement(getDeleteByIdQuery())) {
-            prepareStatementForDeleteById(preparedStatement, id);
+            isDelete = prepareStatementForDeleteById(preparedStatement, id);
         } catch (ConnectionPoolException e) {
             throw new DaoException(e);
         }
-
+        return isDelete;
     }
 
     @Override

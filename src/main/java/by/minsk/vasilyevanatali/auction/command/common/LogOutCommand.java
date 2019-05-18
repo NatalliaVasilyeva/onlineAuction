@@ -10,8 +10,9 @@ public class LogOutCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.getSession().invalidate();
+      //  request.getSession().invalidate();
+        request.getSession().removeAttribute("user");
         //return ViewPage.LOGIN_PAGE.getPath();
-        return "welcome";
+        return "index.jsp";
     }
 }

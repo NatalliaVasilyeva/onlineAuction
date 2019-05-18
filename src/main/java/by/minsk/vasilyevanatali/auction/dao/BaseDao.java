@@ -13,7 +13,7 @@ public interface BaseDao<T extends Bean> {
 
     Optional<T> findById(int id) throws DaoException, SQLException, InterruptedException;
 
-    void deleteById(int id) throws SQLException, DaoException;
+    boolean deleteById(int id) throws SQLException, DaoException;
 
     void delete(T object) throws SQLException, DaoException;
 

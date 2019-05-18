@@ -1,10 +1,12 @@
 package by.minsk.vasilyevanatali.auction.controller;
 
 import by.minsk.vasilyevanatali.auction.command.Command;
+import by.minsk.vasilyevanatali.auction.command.CommandType;
 import by.minsk.vasilyevanatali.auction.connection.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -23,7 +25,7 @@ import static by.minsk.vasilyevanatali.auction.controller.MappingUtil.unfoldExce
  */
 @WebServlet(name = "Controller",
         urlPatterns = {"/welcome", "/sign-up", "/sign-in", "/sign-out", "/profile", "/edit-profile", "/change-language", "/settings", "/change-password", "/business-profile",
-                "/add-auction", "/my-auctions", "/edit-auction"
+                "/add-auction", "/my-auctions", "/edit-auction", "/delete-auction"
                 //"",
 //        "/sign-out", "/profile", "/edit-profile", "/manage-auctions",
 //        "/manage-requests", "/manage-users", "/block-user", "/unblock-user",
@@ -84,14 +86,20 @@ public class Controller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String uri = MappingUtil.getUri(req);
-        System.out.println(uri);
         Command command = MappingUtil.mapToCommand(uri);
-        //   logger.debug("POST request uri: " + uri);
+            //   logger.debug("POST request uri: " + uri);
         try {
-            String page = MappingUtil.mapToJsp(command.execute(req));
+            String pageForRedirect = command.execute(req);
+            if (pageForRedirect.equals("index.jsp")) {
 
+                System.out.println(getServletContext().getContextPath());
+                resp.sendRedirect("/" + pageForRedirect);
+
+            }else {
+            String page = MappingUtil.mapToJsp(command.execute(req));
             System.out.println("page after executors = " + page);
-            req.getRequestDispatcher(page).forward(req, resp);
+                req.getRequestDispatcher(page).forward(req, resp);
+            }
             //       String json = command.execute(req);
             //         logger.debug("JSON retrieved: " + json);
             //     resp.getWriter().write(json);

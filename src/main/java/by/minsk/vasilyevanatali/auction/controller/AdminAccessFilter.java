@@ -21,7 +21,7 @@ import java.io.IOException;
         urlPatterns = {
                 "/block-user", "/unblock-user", "/approve-lot", "/unapprove-lot",
                 "/manage-auctions", "/manage-requests", "/manage-users",
-                "/remove-auction", "/remove-user"
+                 "/remove-user"
 })
 public class AdminAccessFilter implements Filter {
 
